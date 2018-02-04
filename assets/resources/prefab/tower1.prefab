@@ -766,7 +766,10 @@
     },
     "_enabled": true,
     "target": null,
-    "radius": 200
+    "targets": [],
+    "radius": 200,
+    "i": 0,
+    "attack_speed": 20
   },
   {
     "__type__": "cc.Graphics",
@@ -829,7 +832,10 @@
     "tower_area": {
       "__id__": 21
     },
-    "bullet": null
+    "make_bullet": null,
+    "bullet": null,
+    "attack_speed": 20,
+    "attack_speed_i": 0
   },
   {
     "__type__": "cc.PrefabInfo",

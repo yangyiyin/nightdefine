@@ -67,6 +67,7 @@ cc.Class({
 
         //把世界坐标转为本地坐标
         if (head_world_position) {
+          //  console.log(123);
             head.setPosition(this.node.convertToNodeSpaceAR(head_world_position));
         }
 

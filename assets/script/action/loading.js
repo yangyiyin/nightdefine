@@ -32,13 +32,20 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
-
+ //   console.log(22);
+  //  console.log(this.getComponent(cc.ProgressBar).progress);
          cc.loader.loadResDir('res',function(completedCount,totalCount,item){
+
              this.getComponent(cc.ProgressBar).progress = completedCount / totalCount;
+//             console.log(completedCount);
+//             console.log(totalCount);
              if (this.getComponent(cc.ProgressBar).progress == 1) {
-                 cc.director.loadScene('main');
+//                 console.log(99);
+//                 cc.director.loadScene('main');
              }
-         }.bind(this),function(){})
+         }.bind(this),function(){
+             cc.director.loadScene('main');
+         })
 
      },
 

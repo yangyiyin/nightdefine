@@ -27,18 +27,22 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        build_tower:null,
+       // build_tower:null,
         make_enemy:null,
         level:1,
-        level_enemy_num_modify:5
+        level_enemy_num_modify:5,
+        tower_list:null
     },
 
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
+//    console.log(cc.director.isPaused());
          //初始化
-         this.init_build_tower();
+    this.tower_list = {};
+        // this.init_build_tower();
          this.init_make_enemy();
+        this.init_tower_list();
 
      },
 
@@ -48,15 +52,16 @@ cc.Class({
 
     // update (dt) {},
 
-    init_build_tower(){
-        cc.loader.loadRes("prefab/build_tower", function (err, build_tower) {
-
-            this.build_tower = cc.instantiate(build_tower);
-            this.build_tower.parent = this.node;
-        }.bind(this));
-    },
+//    init_build_tower(){
+//        cc.loader.loadRes("prefab/build_tower", function (err, build_tower) {
+//
+//            this.build_tower = cc.instantiate(build_tower);
+//            this.build_tower.parent = this.node;
+//        }.bind(this));
+//    },
     init_make_enemy(){
         cc.loader.loadRes("prefab/make_enemy", function (err, make_enemy) {
+          //  console.log(123);
             this.make_enemy = cc.instantiate(make_enemy);
             this.make_enemy.parent = this.node;
             this.make_enemy.getComponent('make_enemy').init({
@@ -65,6 +70,18 @@ cc.Class({
                 life:this.level * 10
 
             });
+        }.bind(this));
+    },
+    init_tower_list(){
+        GAME.canvas.getChildByName('tower_list').zIndex = 4;
+        cc.loader.loadRes("prefab/tower1", function (t, e) {
+            //console.log(this.tower_list);
+            this.tower_list.tower1 = e;
+            //this.tower_list.tower1.parent = GAME.canvas.getChildByName('tower_list');
+        }.bind(this));
+        cc.loader.loadRes("prefab/tower_list/tower1", function (t, e) {
+            var tower1 = cc.instantiate(e);
+            tower1.parent = GAME.canvas.getChildByName('tower_list');
         }.bind(this));
     },
     enemy_die(){

@@ -39,8 +39,12 @@ cc.Class({
 
     // update (dt) {},
     load_main(){
-        cc.director.resume();
-        cc.director.loadScene('main');
+   //     cc.director.resume();
+   // console.log(cc.director.isPaused());
+        cc.director.loadScene('main',function(){
+            cc.director.resume();
+        });
+ //   cc.game.restart();
     }
 
 });
