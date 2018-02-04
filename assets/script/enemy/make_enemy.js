@@ -30,16 +30,15 @@ cc.Class({
         enemy:null,
         num_max:1,
         num:0,
-        i:0
+        i:0,
+        pool:null,
+        die_num:0
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.loader.loadRes("prefab/enemy1", function (err, enemy) {
-
-            this.enemy = enemy;
-        }.bind(this));
+        this.pool = new cc.NodePool('enemy_pool');
     },
 
     start () {
@@ -48,11 +47,12 @@ cc.Class({
 
     update (dt) {
 
-        if (!(this.i % 20)) {
+        if (!(this.i % 100)) {
+
             this.make();
         }
         this.i++;
-        if (this.i > 20) {
+        if (this.i > 100) {
             this.i = 1;
         }
     },
@@ -61,12 +61,33 @@ cc.Class({
         if (!this.enemy) {
             return ;
         }
+
         if (this.num >= this.num_max) {
             return;
         }
+
         var enemy = cc.instantiate(this.enemy);
         enemy.tag_name = enemy.name + '-' + this.num;
         enemy.parent = GAME.canvas;
         this.num ++;
+    },
+    init(option){
+
+        cc.loader.loadRes("prefab/enemy1", function (err, enemy) {
+            this.enemy = cc.instantiate(enemy);
+            this.enemy.getComponent('enemy').init({
+                speed_x:option.speed_x,
+                life_max:option.life,
+                life:option.life
+            });
+        }.bind(this));
+
+        this.num_max = option.num_max;
+        this.num = 0;
+        this.die_num = 0;
+        this.i = 0;
+    },
+    check_is_no_enemy(){
+        return this.die_num == this.num_max;
     }
 });

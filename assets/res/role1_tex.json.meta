@@ -1,7 +1,0 @@
-{
-  "ver": "1.0.0",
-  "uuid": "c620ec1f-9eca-4e1a-ac21-54645aa562b8",
-  "atlasJson": "{\"imagePath\":\"role1_tex.png\",\"SubTexture\":[{\"x\":1,\"y\":169,\"width\":114,\"name\":\"图层_9\",\"height\":172},{\"x\":117,\"y\":169,\"width\":88,\"name\":\"图层_8\",\"height\":150},{\"x\":1,\"y\":1,\"width\":157,\"name\":\"图层_7\",\"height\":166},{\"x\":1,\"y\":343,\"width\":123,\"name\":\"图层_6\",\"height\":145},{\"x\":207,\"y\":169,\"width\":58,\"name\":\"图层_5\",\"height\":194},{\"x\":126,\"y\":321,\"width\":65,\"name\":\"图层_4\",\"height\":169}],\"width\":512,\"name\":\"role1\",\"height\":512}",
-  "texture": "bfd358d5-829a-456f-8809-a7d6e70ec28b",
-  "subMetas": {}
-}

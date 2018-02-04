@@ -131,6 +131,7 @@ cc.Class({
         }
     },
     guide () {
+        //每帧执行
         if (this.status == 2) {
             var target = this.tower_area.getComponent('tower_area').target;
             if (target) {

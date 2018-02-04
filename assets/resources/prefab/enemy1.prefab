@@ -66,8 +66,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -586,
-      "y": -72
+      "x": -800,
+      "y": -310
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -548,8 +548,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "life_max": 30,
-    "life": 30
+    "life_max": 10,
+    "life": 10,
+    "is_die": false
   },
   {
     "__type__": "cc.PolygonCollider",

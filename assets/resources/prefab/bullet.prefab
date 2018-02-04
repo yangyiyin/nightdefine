@@ -117,8 +117,10 @@
     },
     "_enabled": true,
     "track_target": null,
-    "speed": 5,
-    "bullet_pool": null
+    "speed": 10,
+    "bullet_pool": null,
+    "x_speed_scale": 0,
+    "y_speed_scale": 0
   },
   {
     "__type__": "cc.PrefabInfo",

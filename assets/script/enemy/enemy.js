@@ -28,7 +28,9 @@ cc.Class({
         //     }
         // },
         life_max : 120,
-        life : 120
+        life : 120,
+        is_die:false,
+        speed_x:100
         //resume_map_color_time:120
     },
     // LIFE-CYCLE CALLBACKS:
@@ -44,21 +46,35 @@ cc.Class({
 
     update (dt) {
         var speed = this.body.linearVelocity;
-        speed.x = 250;
+        speed.x = this.speed_x;
 
         this.body.linearVelocity = speed;
 
 
 
+
+    },
+    init(option){
+        option.speed_x && (this.speed_x = option.speed_x);
+        option.life && (this.life = option.life);
+        option.life && (this.life_max = option.life);
     },
 
     onCollisionEnter: function (other, self) {
-
+        if (!cc.isValid(this.node)) {
+            return;
+        }
        if (other.node.group == 'tower_bullet') {
            this.hurt(1);
        }
 
         if (other.node.group == 'end') {
+            if(!this.is_die) {
+                GAME.canvas.getChildByName('life').getChildByName('value').getComponent('life').modify(-1);
+                GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').enemy_die();
+
+            }
+            this.is_die = true;
             this.node.destroy();
             GAME.canvas.getChildByName('map').getComponent('map').red_map();
         //   this.red_map();
@@ -69,7 +85,7 @@ cc.Class({
     },
     hurt(value) {
         this.life -= parseInt(value);
-        if (this.life <= 0) {
+        if (this.life <= 0 && cc.isValid(this.node)) {
             this.die();
             return;
         }
@@ -83,7 +99,15 @@ cc.Class({
         mask.width = width;
     },
     die(){
+        if (!cc.isValid(this.node))  return;
+        if(!this.is_die) {
+            GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(10);
+            GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').enemy_die();
+        }
+        this.is_die = true;
         this.node.destroy();
+
+
     }
 
 });

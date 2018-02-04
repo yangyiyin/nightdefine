@@ -29,7 +29,7 @@ cc.Class({
         // },
 
         track_target:null,
-        speed:10,
+        speed:40,
         bullet_pool:null,
         x_speed_scale:0,
         y_speed_scale:0
