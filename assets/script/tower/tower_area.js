@@ -45,7 +45,7 @@ cc.Class({
     },
 
      update (dt) {
-        this.i++;
+
      },
 
     onCollisionEnter: function (other, self) {
@@ -57,7 +57,7 @@ cc.Class({
         }
         this.targets.push(other.node);
         //console.log(JSON.stringify(this.target.getPosition()));
-        console.log(this.i);
+
 
     },
     onCollisionStay: function (other, self) {
@@ -73,8 +73,7 @@ cc.Class({
        // this.target = null;
         this.remove_target(other.node);
        // console.log('on collision exit');
-        console.log(this.i);
-        console.log(other.node.getComponent('enemy').life);
+
     },
 
     show_area() {

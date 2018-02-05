@@ -755,7 +755,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 400
+    "_radius": 300
   },
   {
     "__type__": "cb303qDb3lDT5T9bIxhbR2d",
@@ -835,7 +835,8 @@
     "attack_speed": 20,
     "attack_speed_i": 0,
     "bullet_name": "bullet2",
-    "selling_price": 80
+    "selling_price": 80,
+    "hurt_value": 2
   },
   {
     "__type__": "cc.PrefabInfo",

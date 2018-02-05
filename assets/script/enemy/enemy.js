@@ -27,10 +27,11 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        life_max : 120,
-        life : 120,
+        life_max : 1,
+        life : 1,
         is_die:false,
-        speed_x:100
+        speed_x:100,
+        die_gold_value:1
         //resume_map_color_time:120
     },
     // LIFE-CYCLE CALLBACKS:
@@ -38,6 +39,7 @@ cc.Class({
     onLoad () {
         this.node.zIndex = 2;
         this.body = this.getComponent(cc.RigidBody);
+        this.die_gold_value = this.get_die_gold_value();
     },
 
     start () {
@@ -102,13 +104,16 @@ cc.Class({
     die(){
         if (!cc.isValid(this.node))  return;
         if(!this.is_die) {
-            GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(10);
+            GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(this.die_gold_value);
             GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').enemy_die();
         }
         this.is_die = true;
         this.node.destroy();
 
 
+    },
+    get_die_gold_value() {
+        return parseInt(0.1 * this.speed_x * this.life_max);
     }
 
 });

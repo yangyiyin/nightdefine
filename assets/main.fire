@@ -923,7 +923,7 @@
     "_enabled": true,
     "make_enemy": null,
     "level": 1,
-    "level_enemy_num_modify": 1,
+    "level_enemy_num": 1,
     "tower_list": null
   },
   {

@@ -13,7 +13,7 @@
 //减速塔造价
 //value = 2 * 减速倍数 * 14r
 //怪物死亡掉落金币计算公式
-//value = 0.01 * speed * 血量
+//value = 0.1 * speed * 血量
 //难度系数
 //当前关怪物总value * 系数0.03
 //每一关难度 <= 当前总钱数 * 系数0.03
@@ -44,7 +44,7 @@ cc.Class({
        // build_tower:null,
         make_enemy:null,
         level:1,
-        level_enemy_num_modify:1,
+        level_enemy_num:1,
         tower_list:null
     },
 
@@ -79,9 +79,9 @@ cc.Class({
             this.make_enemy = cc.instantiate(make_enemy);
             this.make_enemy.parent = this.node;
             this.make_enemy.getComponent('make_enemy').init({
-                num_max:this.level * this.level_enemy_num_modify,
-                speed_x:this.level * 100,
-                life:this.level * 100
+                num_max: this.level_enemy_num,
+                speed_x:(this.level * 20 + 100)
+
 
             });
         }.bind(this));
@@ -123,9 +123,8 @@ cc.Class({
         GAME.canvas.getChildByName('level').getChildByName('value').getComponent('level').set_value(this.level);
 
         this.make_enemy.getComponent('make_enemy').init({
-            num_max:this.level * this.level_enemy_num_modify,
-            speed_x:this.level * 100,
-            life:this.level * 10
+            num_max: this.level_enemy_num,
+            speed_x:(this.level * 20 + 100)
 
         });
     }

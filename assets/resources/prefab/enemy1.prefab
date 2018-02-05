@@ -548,9 +548,11 @@
       "__id__": 1
     },
     "_enabled": true,
-    "life_max": 10,
-    "life": 10,
-    "is_die": false
+    "life_max": 2,
+    "life": 2,
+    "is_die": false,
+    "speed_x": 100,
+    "die_gold_value": 1
   },
   {
     "__type__": "cc.PolygonCollider",

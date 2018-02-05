@@ -37,7 +37,8 @@ cc.Class({
         attack_speed:20,
         attack_speed_i:0,
         bullet_name:'bullet',
-        selling_price:0
+        selling_price:0,
+        hurt_value:1
 
     },
 
@@ -109,7 +110,7 @@ cc.Class({
 
                 this.bullet = cc.instantiate(bullet);
                 this.make_bullet.getComponent('make_bullet').set_bullet(this.bullet);
-                this.make_bullet.getComponent('make_bullet').make(10);
+                this.make_bullet.getComponent('make_bullet').make(10, {hurt_value:this.hurt_value});
                 //this.bullet.getComponent('bullet').bullet_pool = this.make_bullet.getComponent('make_bullet').pool;
                // console.log(this.bullet.getComponent('bullet').bullet_pool );
             }.bind(this));

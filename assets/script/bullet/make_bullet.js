@@ -46,7 +46,7 @@ cc.Class({
      // update (dt) {
      //    this.goto_track_target();
      // },
-    make(num) {
+    make(num,opt) {
         if (!this.bullet) {
             return;
         }
@@ -55,6 +55,7 @@ cc.Class({
         for (var i = 0;i <num; i++) {
             var bullet = cc.instantiate(this.bullet);
             bullet.getComponent('bullet').bullet_pool = this.pool;
+            bullet.getComponent('bullet').hurt_value = opt.hurt_value;
             this.pool.put(bullet);
         }
     },

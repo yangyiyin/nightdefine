@@ -41,13 +41,13 @@ cc.Class({
         this.node.on(cc.Node.EventType.TOUCH_START, function (n) {
             this.tower = GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list[this.node.name];
             this.tower && (t = cc.instantiate(this.tower));
-            selling_price = parseInt(t.getComponent("tower").selling_price);
+            selling_price = this.get_selling_price(t);
+            console.log(selling_price);
             if (!selling_price || GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').get_value() < selling_price) {
                 t = null;
                 return;
             }
-            //console.log(GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list.tower1);
-//console.log(n.getLocation());
+
             t && (t.parent = GAME.canvas, this.tower_can_build = t.getComponent("tower").preview_tower(n.getLocation()))
         }, this), this.node.on(cc.Node.EventType.TOUCH_MOVE, function (e) {
             //console.log(e.getLocation());
@@ -59,7 +59,7 @@ cc.Class({
 
                 if (this.tower_can_build){
                     t.getComponent("tower").build_tower(e.getLocation());
-                    GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(-50);
+                    GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(-selling_price);
 
                 } else {
                     t.destroy();
@@ -86,6 +86,13 @@ cc.Class({
     start () {
 
     },
-
+    get_selling_price(t){
+        if (!t) {
+            return null;
+        }
+        var t_cpt = t.getComponent("tower");
+    //console.log(t_cpt);
+        return parseInt(14 * t_cpt.tower_area.getComponent(cc.CircleCollider).radius * t_cpt.hurt_value / t_cpt.attack_speed);
+    }
     // update (dt) {},
 });
