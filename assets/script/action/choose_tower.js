@@ -34,18 +34,23 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
-        this.tower = GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list[this.node.name];
+        // this.tower = GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list[this.node.name];
+        //  console.log(GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list.tower1);
         var t = null;
+         var selling_price = 0;
         this.node.on(cc.Node.EventType.TOUCH_START, function (n) {
-            if (GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').get_value() < 50) {
+            this.tower = GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list[this.node.name];
+            this.tower && (t = cc.instantiate(this.tower));
+            selling_price = parseInt(t.getComponent("tower").selling_price);
+            if (!selling_price || GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').get_value() < selling_price) {
                 t = null;
                 return;
             }
-
+            //console.log(GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list.tower1);
 //console.log(n.getLocation());
-            this.tower && ((t = cc.instantiate(this.tower)).parent = GAME.canvas, this.tower_can_build = t.getComponent("tower").preview_tower(n.getLocation()))
+            t && (t.parent = GAME.canvas, this.tower_can_build = t.getComponent("tower").preview_tower(n.getLocation()))
         }, this), this.node.on(cc.Node.EventType.TOUCH_MOVE, function (e) {
-
+            //console.log(e.getLocation());
             t && (this.tower_can_build = t.getComponent("tower").preview_tower(e.getLocation()))
         }, this), this.node.on(cc.Node.EventType.TOUCH_END, function (e) {
 
@@ -67,7 +72,8 @@ cc.Class({
 
                 if (this.tower_can_build){
                     t.getComponent("tower").build_tower(e.getLocation());
-                    GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(-50);
+                    //var selling_price = parseInt(t.getComponent("tower").selling_price);
+                    GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(-selling_price);
 
                 } else {
                     t.destroy();

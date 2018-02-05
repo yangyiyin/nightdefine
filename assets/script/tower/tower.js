@@ -35,7 +35,9 @@ cc.Class({
         make_bullet:null,
         bullet:null,
         attack_speed:20,
-        attack_speed_i:0
+        attack_speed_i:0,
+        bullet_name:'bullet',
+        selling_price:0
 
     },
 
@@ -103,7 +105,7 @@ cc.Class({
         cc.loader.loadRes("prefab/make_bullet", function (err, make_bullet) {
             this.make_bullet = cc.instantiate(make_bullet);
           //  this.make_bullet
-            cc.loader.loadRes("prefab/bullet", function (err, bullet) {
+            cc.loader.loadRes("prefab/"+this.bullet_name, function (err, bullet) {
 
                 this.bullet = cc.instantiate(bullet);
                 this.make_bullet.getComponent('make_bullet').set_bullet(this.bullet);

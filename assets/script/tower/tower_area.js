@@ -29,9 +29,7 @@ cc.Class({
         // },
         target :null,
         targets :[],
-        radius:200,
-        i:0,
-        attack_speed:20
+        i:0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -46,9 +44,9 @@ cc.Class({
 
     },
 
-     // update (dt) {
-     //
-     // },
+     update (dt) {
+        this.i++;
+     },
 
     onCollisionEnter: function (other, self) {
         if (!other.node || !cc.isValid(other.node)) {
@@ -59,6 +57,7 @@ cc.Class({
         }
         this.targets.push(other.node);
         //console.log(JSON.stringify(this.target.getPosition()));
+        console.log(this.i);
 
     },
     onCollisionStay: function (other, self) {
@@ -74,6 +73,8 @@ cc.Class({
        // this.target = null;
         this.remove_target(other.node);
        // console.log('on collision exit');
+        console.log(this.i);
+        console.log(other.node.getComponent('enemy').life);
     },
 
     show_area() {

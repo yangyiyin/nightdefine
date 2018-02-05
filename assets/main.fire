@@ -921,10 +921,10 @@
       "__id__": 20
     },
     "_enabled": true,
-    "build_tower": null,
     "make_enemy": null,
     "level": 1,
-    "level_enemy_num_modify": 5
+    "level_enemy_num_modify": 1,
+    "tower_list": null
   },
   {
     "__type__": "cc.Node",
@@ -1813,8 +1813,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 725,
-      "y": 423
+      "x": -744,
+      "y": -34
     },
     "_skewX": 0,
     "_skewY": 0,

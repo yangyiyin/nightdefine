@@ -41,6 +41,7 @@ cc.Class({
     load_main(){
    //     cc.director.resume();
    // console.log(cc.director.isPaused());
+        cc.director.resume();
         cc.director.loadScene('main',function(){
             cc.director.resume();
         });

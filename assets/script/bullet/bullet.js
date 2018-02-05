@@ -32,7 +32,8 @@ cc.Class({
         speed:40,
         bullet_pool:null,
         x_speed_scale:0,
-        y_speed_scale:0
+        y_speed_scale:0,
+        hurt_value:1
     },
 
     // LIFE-CYCLE CALLBACKS:

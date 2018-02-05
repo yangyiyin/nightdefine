@@ -65,7 +65,8 @@ cc.Class({
             return;
         }
        if (other.node.group == 'tower_bullet') {
-           this.hurt(1);
+           var hurt_value = other.node.getComponent('bullet').hurt_value;
+           this.hurt(hurt_value);
        }
 
         if (other.node.group == 'end') {
