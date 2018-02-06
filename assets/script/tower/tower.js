@@ -103,18 +103,11 @@ cc.Class({
     },
     init_bullet() {
         //this.bulletPool = new cc.NodePool('bullet');
-        cc.loader.loadRes("prefab/make_bullet", function (err, make_bullet) {
-            this.make_bullet = cc.instantiate(make_bullet);
-          //  this.make_bullet
-            cc.loader.loadRes("prefab/"+this.bullet_name, function (err, bullet) {
-
-                this.bullet = cc.instantiate(bullet);
-                this.make_bullet.getComponent('make_bullet').set_bullet(this.bullet);
-                this.make_bullet.getComponent('make_bullet').make(10, {hurt_value:this.hurt_value});
-                //this.bullet.getComponent('bullet').bullet_pool = this.make_bullet.getComponent('make_bullet').pool;
-               // console.log(this.bullet.getComponent('bullet').bullet_pool );
-            }.bind(this));
-        }.bind(this));
+        this.make_bullet = cc.instantiate(GAME.resource["prefab/make_bullet"]);
+        //  this.make_bullet
+        this.bullet = cc.instantiate(GAME.resource["prefab/"+this.bullet_name]);
+        this.make_bullet.getComponent('make_bullet').set_bullet(this.bullet);
+        this.make_bullet.getComponent('make_bullet').make(10, {hurt_value:this.hurt_value});
     },
     attack(target) {
         if (!target || !cc.isValid(target)) {

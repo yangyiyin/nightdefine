@@ -1,4 +1,5 @@
 var GAME = {
-    canvas:{}
+    canvas:{},
+    resource:{}
 };
 module.exports = GAME;

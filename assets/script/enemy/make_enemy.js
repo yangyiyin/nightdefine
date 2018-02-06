@@ -28,9 +28,11 @@ cc.Class({
         //     }
         // },
         enemy:null,
-        num_max:1,
+        enemy_list:[],
+        num_max:0,
         num:0,
         i:0,
+        modify_i:100,
         pool:null,
         die_num:0
     },
@@ -47,42 +49,60 @@ cc.Class({
 
     update (dt) {
 
-        if (!(this.i % 100)) {
+        if (!(this.i % this.modify_i)) {
 
-            this.make();
+            this.modify_i = this.make();
         }
         this.i++;
-        if (this.i > 100) {
+        if (this.i > this.modify_i) {
             this.i = 1;
         }
     },
     make(){
 
-        if (!this.enemy) {
+        if (!this.enemy_list.length) {
             return ;
         }
 
-        if (this.num >= this.num_max) {
+        var enemy = this.enemy_list[0];
+        // this.enemy_list.splice(0,1);
+       // console.log(enemy);
+        if (!enemy) {
             return;
         }
-
-        var enemy = cc.instantiate(this.enemy);
+        this.enemy_list.splice(0,1);
+        //var enemy = cc.instantiate(this.enemy);
         enemy.tag_name = enemy.name + '-' + this.num;
+       // console.log(enemy.tag_name);
         enemy.parent = GAME.canvas;
         this.num ++;
+        var next_enemy = this.enemy_list[0];
+        if (!next_enemy) {
+            return 0;
+        } else {
+            return parseInt(100 * next_enemy.getComponent(cc.PhysicsCircleCollider).radius * next_enemy.scaleX / next_enemy.getComponent('enemy').speed_x);
+
+        }
     },
-    init(option){
+    init(list){
+        this.num_max = 0;
+        for(var i in list) {
+            for(var j = 0; j < list[i].num; j++) {
 
-        cc.loader.loadRes("prefab/enemy1", function (err, enemy) {
-            this.enemy = cc.instantiate(enemy);
-            this.enemy.getComponent('enemy').init({
-                speed_x:option.speed_x,
-                life_max:option.life,
-                life:option.life
-            });
-        }.bind(this));
+                var enemy = cc.instantiate(GAME.resource["prefab/" + list[i].name]);
 
-        this.num_max = option.num_max;
+                enemy.getComponent('enemy').init({
+                    speed_x: list[i].speed_x,
+                    life_max: list[i].life,
+                    life: list[i].life
+                });
+                //console.log(enemy.name);
+                this.enemy_list.push(enemy);
+
+            }
+            this.num_max += list[i].num;
+        }
+
         this.num = 0;
         this.die_num = 0;
         this.i = 0;

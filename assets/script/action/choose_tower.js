@@ -42,7 +42,7 @@ cc.Class({
             this.tower = GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').tower_list[this.node.name];
             this.tower && (t = cc.instantiate(this.tower));
             selling_price = this.get_selling_price(t);
-            console.log(selling_price);
+            //console.log(selling_price);
             if (!selling_price || GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').get_value() < selling_price) {
                 t = null;
                 return;
