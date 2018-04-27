@@ -40,6 +40,7 @@ cc.Class({
 
     },
     set_bullet(bullet){
+       // this.bullet.parent_tower =3;
         this.bullet = bullet;
     },
 
@@ -54,6 +55,7 @@ cc.Class({
 
         for (var i = 0;i <num; i++) {
             var bullet = cc.instantiate(this.bullet);
+            bullet.parent_tower = opt.parent_tower;
             bullet.getComponent('bullet').bullet_pool = this.pool;
             bullet.getComponent('bullet').hurt_value = opt.hurt_value;
             this.pool.put(bullet);

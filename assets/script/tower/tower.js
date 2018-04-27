@@ -38,7 +38,10 @@ cc.Class({
         attack_speed_i:0,
         bullet_name:'bullet',
         selling_price:0,
-        hurt_value:1
+        hurt_value:1,
+        experience:0,
+        level_up_experience:1000,
+        level:1
 
     },
 
@@ -57,6 +60,7 @@ cc.Class({
      update (dt) {
 
          this.guide();
+
      },
 
     preview_tower (head_world_position) {
@@ -106,8 +110,9 @@ cc.Class({
         this.make_bullet = cc.instantiate(GAME.resource["prefab/make_bullet"]);
         //  this.make_bullet
         this.bullet = cc.instantiate(GAME.resource["prefab/"+this.bullet_name]);
+        // this.bullet.getComponent('bullet').parent_tower = this.node;
         this.make_bullet.getComponent('make_bullet').set_bullet(this.bullet);
-        this.make_bullet.getComponent('make_bullet').make(10, {hurt_value:this.hurt_value});
+        this.make_bullet.getComponent('make_bullet').make(10, {hurt_value:this.hurt_value,parent_tower:this.node});
     },
     attack(target) {
         if (!target || !cc.isValid(target)) {
@@ -141,6 +146,28 @@ cc.Class({
                 }
             }
         }
+    },
+    add_experience(num){
+        this.experience += num;
+        var level_up_num = this.check_level_up(1);
+        if (level_up_num > 0) {
+            this.level_up(level_up_num);
+        }
+    },
+    check_level_up(n){
+        var next_level_experience = 0;//当前登记
+        for (var i = 1;i <= (this.level+n); i++) {
+            next_level_experience += i*i*i*this.level_up_experience;
+        }
+
+        if (this.experience >= next_level_experience) {
+            return this.check_level_up(n+1);
+        } else {
+            return n - 1;
+        }
+    },
+    level_up(num){
+        this.level += num;
     }
 
 });

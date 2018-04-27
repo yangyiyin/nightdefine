@@ -67,8 +67,9 @@ cc.Class({
             return;
         }
        if (other.node.group == 'tower_bullet') {
+
            var hurt_value = other.node.getComponent('bullet').hurt_value;
-           this.hurt(hurt_value);
+           this.hurt(hurt_value, other);
        }
 
         if (other.node.group == 'end') {
@@ -80,16 +81,17 @@ cc.Class({
             this.is_die = true;
             this.node.destroy();
             GAME.canvas.getChildByName('map').getComponent('map').red_map();
+
         //   this.red_map();
 
         }
 
 
     },
-    hurt(value) {
+    hurt(value, other) {
         this.life -= parseInt(value);
         if (this.life <= 0 && cc.isValid(this.node)) {
-            this.die();
+            this.die(other);
             return;
         }
         this.set_life_line();
@@ -101,11 +103,13 @@ cc.Class({
         var width = width_max * this.life / this.life_max;
         mask.width = width;
     },
-    die(){
+    die(other){
         if (!cc.isValid(this.node))  return;
         if(!this.is_die) {
             GAME.canvas.getChildByName('gold').getChildByName('value').getComponent('gold').modify(this.die_gold_value);
             GAME.canvas.getChildByName('action').getChildByName('game_center').getComponent('game_center').enemy_die();
+            //增加塔的经验值
+            other.node.parent_tower.getComponent('tower').add_experience(this.get_enemy_experience());
         }
         this.is_die = true;
         this.node.destroy();
@@ -114,6 +118,9 @@ cc.Class({
     },
     get_die_gold_value() {
         return parseInt(0.1 * this.speed_x * this.life_max);
+    },
+    get_enemy_experience(){
+        return parseInt(this.speed_x * this.life_max);
     }
 
 });

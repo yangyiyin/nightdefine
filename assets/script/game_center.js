@@ -120,12 +120,6 @@ cc.Class({
                 'num':2,
                 'speed_x':(this.level * 20),
                 'life':(this.level * 4 + 1)
-            },
-            {
-                'name':'enemy3',
-                'num':2,
-                'speed_x':(this.level * 20),
-                'life':(this.level * 4 + 1)
             }
         ];
     }
